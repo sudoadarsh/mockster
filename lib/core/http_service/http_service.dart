@@ -1,11 +1,9 @@
 import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
-import 'package:mockster/core/http_service/http_errors.dart';
-import 'package:mockster/core/http_service/http_response_schema.dart';
-
 import 'http_configuration.dart';
+import 'http_errors.dart';
+import 'http_response_schema.dart';
 
 part 'http_request_params.dart';
 

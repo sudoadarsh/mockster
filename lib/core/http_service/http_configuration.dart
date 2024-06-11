@@ -1,4 +1,4 @@
-import 'package:mockster/core/http_service/http_response_schema.dart';
+import 'http_response_schema.dart';
 
 class HttpConfiguration {
   /// Whether the authority is secured or not.
