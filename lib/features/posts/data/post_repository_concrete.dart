@@ -1,8 +1,6 @@
 import '../domain/entities/post_entity.dart';
 import '../domain/entities/user_entity.dart';
 import '../domain/post_repository.dart';
-import 'models/post_model.dart';
-import 'models/user_model.dart';
 import 'source/post_source.dart';
 
 class PostRepositoryConcrete implements PostRepository {
