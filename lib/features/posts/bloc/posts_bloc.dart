@@ -1,4 +1,5 @@
 import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import '../domain/entities/post_entity.dart';
@@ -23,5 +24,9 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
         emit(PostsFetchFailedState(error));
       }
     }, transformer: droppable());
+
+    on<FetchUsersEvent>((event, emit) async {
+
+    });
   }
 }

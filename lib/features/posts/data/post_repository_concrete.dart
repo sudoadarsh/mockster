@@ -12,27 +12,8 @@ class PostRepositoryConcrete implements PostRepository {
   PostRepositoryConcrete({required this.source});
 
   @override
-  Future<List<PostEntity>> fetchPosts() async {
-    final List<PostModel> posts = await source.fetchPosts();
-    return posts.map((final PostModel post) {
-      return PostEntity(
-        postId: post.id,
-        userId: post.userId,
-        title: post.title,
-        body: post.body,
-      );
-    }).toList();
-  }
+  Future<List<PostEntity>> fetchPosts() async => await source.fetchPosts();
 
   @override
-  Future<List<UserEntity>> fetchUsers() async {
-    final List<UserModel> users = await source.fetchUsers();
-    return users.map((final UserModel user) {
-      return UserEntity(
-        email: user.email,
-        catchPhrase: user.company?.catchPhrase,
-        company: user.company?.name,
-      );
-    }).toList();
-  }
+  Future<List<UserEntity>> fetchUsers() async => await source.fetchUsers();
 }

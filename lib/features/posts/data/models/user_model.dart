@@ -1,34 +1,41 @@
-class UserModel {
+import 'package:collection/collection.dart';
+
+import '../../domain/entities/user_entity.dart';
+
+class UserModel extends UserEntity {
   int? id;
   String? name;
   String? username;
-  String? email;
+  String? email_;
   Address? address;
   String? phone;
   String? website;
-  Company? company;
+  Company? company_;
 
-  UserModel(
-      {this.id,
-      this.name,
-      this.username,
-      this.email,
-      this.address,
-      this.phone,
-      this.website,
-      this.company});
+  UserModel({
+    this.id,
+    this.name,
+    this.username,
+    this.email_,
+    this.address,
+    this.phone,
+    this.website,
+    this.company_,
+  });
 
   UserModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+    id = userId = json['id'];
     name = json['name'];
     username = json['username'];
-    email = json['email'];
+    email_ = email = json['email_'];
     address =
         json['address'] != null ? Address.fromJson(json['address']) : null;
     phone = json['phone'];
     website = json['website'];
-    company =
+    company_ =
         json['company'] != null ? Company.fromJson(json['company']) : null;
+    company = company_?.name;
+    catchPhrase = company_?.catchPhrase;
   }
 
   Map<String, dynamic> toJson() {
@@ -36,17 +43,32 @@ class UserModel {
     data['id'] = id;
     data['name'] = name;
     data['username'] = username;
-    data['email'] = email;
+    data['email_'] = email_;
     if (address != null) {
       data['address'] = address!.toJson();
     }
     data['phone'] = phone;
     data['website'] = website;
     if (company != null) {
-      data['company'] = company!.toJson();
+      data['company'] = company_!.toJson();
     }
     return data;
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is UserModel) {
+      return const DeepCollectionEquality().equals(
+        toJson(),
+        other.toJson(),
+      );
+    }
+    return super == other;
+  }
+
+  @override
+  int get hashCode => id.hashCode;
 }
 
 class Address {

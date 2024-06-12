@@ -26,3 +26,9 @@ class InvalidResponseSchemaError extends HttpError {
   final Object? error;
   InvalidResponseSchemaError(this.error);
 }
+
+/// Http client error.
+class HttpClientError extends HttpError {
+  final Object? error;
+  HttpClientError(this.error);
+}

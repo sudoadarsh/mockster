@@ -1,7 +1,8 @@
 class UserEntity {
-  final String? email;
-  final String? company;
-  final String? catchPhrase;
+  int? userId;
+  String? email;
+  String? company;
+  String? catchPhrase;
 
   UserEntity({this.email, this.company, this.catchPhrase});
 }

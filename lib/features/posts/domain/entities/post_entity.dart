@@ -1,8 +1,8 @@
 class PostEntity {
-  final int? postId;
-  final int? userId;
-  final String? title;
-  final String? body;
+  int? postId;
+  int? userId;
+  String? title;
+  String? body;
 
   PostEntity({this.postId, this.userId, this.title, this.body});
 }

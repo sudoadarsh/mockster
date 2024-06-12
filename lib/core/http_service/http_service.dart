@@ -60,29 +60,38 @@ class HttpService {
     final Duration requestTimeout;
     requestTimeout = params.requestTimeout ?? configuration.requestTimeout;
 
+    // Create the http client.
+    final http.Client client = mockClient ?? http.Client();
+
     // Create the http request.
     final http.Response response;
-    switch (params.method) {
-      case RequestMethod.get:
-        response = await http
-            .get(url, headers: requestHeaders)
-            .timeout(requestTimeout, onTimeout: _timeout);
-      case RequestMethod.post:
-        response = await http
-            .post(url, headers: requestHeaders, body: body)
-            .timeout(requestTimeout, onTimeout: _timeout);
-      case RequestMethod.put:
-        response = await http
-            .put(url, headers: requestHeaders, body: body)
-            .timeout(requestTimeout, onTimeout: _timeout);
-      case RequestMethod.patch:
-        response = await http
-            .patch(url, headers: requestHeaders, body: body)
-            .timeout(requestTimeout, onTimeout: _timeout);
-      case RequestMethod.delete:
-        response = await http
-            .delete(url, headers: requestHeaders, body: body)
-            .timeout(requestTimeout, onTimeout: _timeout);
+    try {
+      switch (params.method) {
+        case RequestMethod.get:
+          response = await client
+              .get(url, headers: requestHeaders)
+              .timeout(requestTimeout, onTimeout: _timeout);
+        case RequestMethod.post:
+          response = await client
+              .post(url, headers: requestHeaders, body: body)
+              .timeout(requestTimeout, onTimeout: _timeout);
+        case RequestMethod.put:
+          response = await client
+              .put(url, headers: requestHeaders, body: body)
+              .timeout(requestTimeout, onTimeout: _timeout);
+        case RequestMethod.patch:
+          response = await client
+              .patch(url, headers: requestHeaders, body: body)
+              .timeout(requestTimeout, onTimeout: _timeout);
+        case RequestMethod.delete:
+          response = await client
+              .delete(url, headers: requestHeaders, body: body)
+              .timeout(requestTimeout, onTimeout: _timeout);
+      }
+    } catch (error) {
+      throw HttpClientError(error);
+    } finally {
+      client.close(); // Close the client.
     }
 
     // Decode the response.
