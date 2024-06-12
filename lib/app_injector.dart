@@ -5,9 +5,9 @@ import 'features/posts/data/source/post_remote_source.dart';
 
 class AppInjector {
   AppInjector() {
-    // Inject all the dependency.
     final DependencyInjector di = DependencyInjector();
 
+    // Inject all the dependency.
     di.registerLazy(() => PostRemoteSource());
     di.registerLazy(
       () => PostRepositoryConcrete(source: di.accessLazy<PostRemoteSource>()),

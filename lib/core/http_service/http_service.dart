@@ -32,7 +32,7 @@ class HttpService {
   }
 
   /// Create a http request.
-  Future<HttpResponseSchema<T>> request<T extends Object>(
+  Future<T> request<T extends Object>(
     final HttpRequestParams params, {
     final HttpResponseSchema<T>? customSchema,
   }) async {
@@ -90,10 +90,12 @@ class HttpService {
     if (decodedResponse == null) throw InvalidDataError(response.body);
 
     // Get the response schema.
-    final HttpResponseSchema<T> schema = _getSchema<T>(
-      customSchema,
-      decodedResponse: decodedResponse,
-    );
+    final HttpResponseSchema<T> schema;
+    try {
+      schema = _getSchema<T>(customSchema, decodedResponse: decodedResponse);
+    } catch (error) {
+      throw InvalidResponseSchemaError(error);
+    }
 
     // Check the status code.
     if (response.statusCode ~/ 400 > 0) {
@@ -101,7 +103,8 @@ class HttpService {
       throw ServerError(schema.code, schema.description);
     }
 
-    return schema;
+    if (schema.data == null) throw EmptyDataError();
+    return schema.data!;
   }
 
   // -------------- Private methods. --------------

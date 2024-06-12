@@ -3,8 +3,8 @@ import '../models/user_model.dart';
 
 abstract class PostSource {
   /// Fetch the posts.
-  Future<List<PostModel>?> fetchPosts();
+  Future<List<PostModel>> fetchPosts();
 
   /// Fetch the users.
-  Future<List<UserModel>?> fetchUsers();
+  Future<List<UserModel>> fetchUsers();
 }

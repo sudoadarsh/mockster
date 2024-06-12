@@ -16,6 +16,7 @@ class _PostsPageState extends State<PostsPage> {
   @override
   void initState() {
     postsBloc = DependencyInjector().accessLazy<PostsBloc>();
+    postsBloc.add(FetchPostsEvent());
     super.initState();
   }
 

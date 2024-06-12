@@ -17,3 +17,12 @@ class ServerError extends HttpError {
 
 /// Request time-out error.
 class RequestTimeoutError extends HttpError {}
+
+/// Empty data error.
+class EmptyDataError extends HttpError {}
+
+/// Invalid response schema error.
+class InvalidResponseSchemaError extends HttpError {
+  final Object? error;
+  InvalidResponseSchemaError(this.error);
+}

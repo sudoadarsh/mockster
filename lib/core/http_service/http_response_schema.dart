@@ -9,7 +9,7 @@ class HttpResponseSchema<T extends Object> {
     return HttpResponseSchema<E>(
       code: response["code"],
       data: response["data"],
-      description: response["description"]
+      description: response["description"],
     );
   }
 }
