@@ -13,5 +13,13 @@ class PostRepositoryConcrete implements PostRepository {
   Future<List<PostEntity>> fetchPosts() async => await source.fetchPosts();
 
   @override
-  Future<List<UserEntity>> fetchUsers() async => await source.fetchUsers();
+  Future<Map<int, UserEntity>> fetchUsers() async {
+    final List<UserEntity> users = await source.fetchUsers();
+    final Map<int, UserEntity> hashmap = <int, UserEntity>{};
+    for (final UserEntity entity in users) {
+      if (entity.userId == null) continue;
+      hashmap[entity.userId!] = entity;
+    }
+    return hashmap;
+  }
 }

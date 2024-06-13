@@ -7,5 +7,5 @@ abstract interface class PostRepository {
   Future<List<PostEntity>> fetchPosts();
 
   /// Fetch the user.
-  Future<List<UserEntity>> fetchUsers();
+  Future<Map<int, UserEntity>> fetchUsers();
 }

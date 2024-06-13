@@ -1,5 +1,6 @@
 class UserEntity {
   int? userId;
+  String? name;
   String? email;
   String? company;
   String? catchPhrase;
